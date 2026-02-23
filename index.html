@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>OrderMaster - Light Theme</title>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        :root {
+            --primary: #60a5fa;
+            --primary-light: #93c5fd;
+            --primary-dark: #3b82f6;
+            --white: #ffffff;
+            --off-white: #f9fafb;
+            --light-gray: #f3f4f6;
+            --medium-gray: #e5e7eb;
+            --gray: #9ca3af;
+            --dark-gray: #6b7280;
+            --black: #1f2937;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        body {
+            background: var(--light-gray);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+        }
+
+        /* Mobile App Container */
+        .app-container {
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+            background: var(--white);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* App Header */
+        .app-header {
+            padding: 24px 20px 16px;
+            background: var(--white);
+            border-bottom: 1px solid var(--medium-gray);
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo i {
+            font-size: 24px;
+            color: var(--primary);
+            background: var(--light-gray);
+            padding: 8px;
+            border-radius: 12px;
+        }
+
+        .logo h1 {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--black);
+            letter-spacing: -0.5px;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .user-name {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--dark-gray);
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 16px;
+            color: var(--white);
+        }
+
+        .welcome-section h2 {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--black);
+            margin-bottom: 4px;
+        }
+
+        .welcome-section p {
+            font-size: 14px;
+            color: var(--gray);
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            padding: 0 20px 20px;
+            overflow-y: auto;
+        }
+
+        /* Countdown Timer Section - Smaller and Cleaner */
+        .countdown-section {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            border-radius: 20px;
+            padding: 16px 20px;
+            margin-bottom: 24px;
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .countdown-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .countdown-label i {
+            font-size: 20px;
+            color: var(--white);
+            opacity: 0.9;
+        }
+
+        .countdown-label span {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--white);
+            opacity: 0.9;
+        }
+
+        .countdown-timer {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 6px 12px;
+            border-radius: 30px;
+            backdrop-filter: blur(4px);
+        }
+
+        .timer-digits {
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--white);
+            font-family: 'Inter', monospace;
+        }
+
+        .timer-digits span {
+            min-width: 32px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.1);
+            padding: 2px 4px;
+            border-radius: 8px;
+        }
+
+        .timer-colon {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--white);
+            margin: 0 0px;
+        }
+
+        /* Stats Cards - Light */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: var(--off-white);
+            border: 1px solid var(--medium-gray);
+            padding: 16px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            border-color: var(--primary);
+            box-shadow: var(--shadow);
+        }
+
+        .stat-icon {
+            width: 44px;
+            height: 44px;
+            background: var(--white);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 22px;
+            border: 1px solid var(--medium-gray);
+        }
+
+        .stat-info h3 {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--gray);
+            margin-bottom: 4px;
+        }
+
+        .stat-info .stat-number {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--black);
+        }
+
+        /* Order Actions */
+        .order-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        /* Modern Light Button */
+        .modern-btn {
+            position: relative;
+            padding: 20px 56px;
+            font-family: "Inter", sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--white);
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            border-radius: 30px;
+            box-shadow: 0 10px 20px -5px rgba(96, 165, 250, 0.3);
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .modern-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .modern-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px -5px rgba(96, 165, 250, 0.4);
+        }
+
+        .modern-btn:hover::before {
+            left: 100%;
+        }
+
+        .modern-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 5px 15px -5px rgba(96, 165, 250, 0.4);
+        }
+
+        .modern-btn .btn-text {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2px;
+            z-index: 2;
+        }
+
+        .modern-btn .btn-text span {
+            display: inline-block;
+            transition: transform 0.3s ease;
+            transition-delay: calc(var(--i) * 0.02s);
+        }
+
+        .modern-btn:hover .btn-text span {
+            transform: translateY(-3px) scale(1.1);
+        }
+
+        /* Light Button for QR */
+        .light-btn {
+            padding: 16px 20px;
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            cursor: pointer;
+            width: 100%;
+            background: var(--white);
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+        }
+
+        .light-btn:hover {
+            background: var(--primary);
+            color: var(--white);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .light-btn:active {
+            transform: translateY(0);
+        }
+
+        .light-btn i {
+            font-size: 20px;
+        }
+
+        /* Orders Section - Light */
+        .orders-section {
+            background: var(--off-white);
+            border: 1px solid var(--medium-gray);
+            border-radius: 24px;
+            padding: 16px;
+            margin-bottom: 20px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .section-header h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--black);
+        }
+
+        .section-header i {
+            color: var(--primary);
+            font-size: 20px;
+        }
+
+        .orders-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            max-height: 220px;
+            overflow-y: auto;
+        }
+
+        .orders-list::-webkit-scrollbar {
+            width: 3px;
+        }
+
+        .orders-list::-webkit-scrollbar-track {
+            background: var(--medium-gray);
+            border-radius: 10px;
+        }
+
+        .orders-list::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 10px;
+        }
+
+        .order-item {
+            background: var(--white);
+            border: 1px solid var(--medium-gray);
+            border-radius: 16px;
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .order-item:hover {
+            border-color: var(--primary);
+            box-shadow: var(--shadow);
+        }
+
+        .order-icon {
+            width: 44px;
+            height: 44px;
+            background: var(--light-gray);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            border: 1px solid var(--medium-gray);
+        }
+
+        .order-info {
+            flex: 1;
+        }
+
+        .order-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 4px;
+        }
+
+        .order-id {
+            font-weight: 600;
+            color: var(--black);
+            font-size: 13px;
+        }
+
+        .order-type {
+            font-size: 10px;
+            padding: 2px 8px;
+            background: var(--light-gray);
+            border-radius: 20px;
+            color: var(--dark-gray);
+            border: 1px solid var(--medium-gray);
+        }
+
+        .order-items {
+            color: var(--dark-gray);
+            font-size: 12px;
+            margin-bottom: 4px;
+        }
+
+        .order-time {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            color: var(--gray);
+            font-size: 10px;
+        }
+
+        .order-amount {
+            font-weight: 700;
+            color: var(--black);
+            font-size: 16px;
+            background: var(--light-gray);
+            padding: 4px 10px;
+            border-radius: 20px;
+            border: 1px solid var(--medium-gray);
+        }
+
+        /* Bottom Navigation - Light */
+        .bottom-nav {
+            background: var(--white);
+            border-top: 1px solid var(--medium-gray);
+            padding: 10px 20px 20px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            border-radius: 30px 30px 0 0;
+            box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 8px 12px;
+            border-radius: 20px;
+            min-width: 70px;
+        }
+
+        .nav-item i {
+            font-size: 22px;
+            color: var(--gray);
+            transition: all 0.3s ease;
+        }
+
+        .nav-item span {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--gray);
+            transition: all 0.3s ease;
+        }
+
+        .nav-item.active {
+            background: var(--light-gray);
+        }
+
+        .nav-item.active i {
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .nav-item.active span {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .nav-item:hover i {
+            color: var(--primary);
+        }
+
+        .nav-item:hover span {
+            color: var(--dark-gray);
+        }
+
+        /* Modal - Light */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 16px;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--white);
+            border-radius: 32px;
+            padding: 32px 24px;
+            width: 100%;
+            max-width: 320px;
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--medium-gray);
+        }
+
+        .modal-content i {
+            font-size: 60px;
+            color: var(--primary);
+            margin-bottom: 16px;
+        }
+
+        .modal-content h2 {
+            font-size: 22px;
+            color: var(--black);
+            margin-bottom: 8px;
+        }
+
+        .modal-content p {
+            color: var(--dark-gray);
+            font-size: 14px;
+            margin-bottom: 24px;
+        }
+
+        .qr-placeholder {
+            background: var(--light-gray);
+            border: 2px dashed var(--medium-gray);
+            border-radius: 24px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+
+        .qr-placeholder i {
+            font-size: 80px;
+            color: var(--gray);
+            margin-bottom: 0;
+        }
+
+        .modal-close {
+            background: var(--light-gray);
+            border: 1px solid var(--medium-gray);
+            color: var(--dark-gray);
+            padding: 14px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.2s ease;
+        }
+
+        .modal-close:hover {
+            background: var(--medium-gray);
+        }
+
+        .modal-close:active {
+            transform: scale(0.97);
+        }
+
+        /* Timer animation */
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        .timer-digits span {
+            animation: pulse 2s ease infinite;
+        }
+
+        .timer-digits span:nth-child(2) {
+            animation-delay: 0.3s;
+        }
+
+        .timer-digits span:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- App Header -->
+        <div class="app-header">
+            <div class="header-top">
+                <div class="logo">
+                    <i class="fas fa-bolt"></i>
+                    <h1>OrderMaster</h1>
+                </div>
+                <div class="user-info">
+                    <span class="user-name">John Doe</span>
+                    <div class="avatar">JD</div>
+                </div>
+            </div>
+            <div class="welcome-section">
+                <h2>Welcome Back! 👋</h2>
+                <p>Ready to place your order?</p>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Countdown Timer Section - Smaller and Cleaner -->
+            <div class="countdown-section">
+                <div class="countdown-label">
+                    <i class="fas fa-clock"></i>
+                    <span>Flash Sale Ends</span>
+                </div>
+                <div class="countdown-timer">
+                    <div class="timer-digits">
+                        <span id="hours">00</span>
+                        <span class="timer-colon">:</span>
+                        <span id="minutes">36</span>
+                        <span class="timer-colon">:</span>
+                        <span id="seconds">58</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-shopping-bag"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Total Orders</h3>
+                        <div class="stat-number" id="totalOrders">24</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-qrcode"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>QR Orders</h3>
+                        <div class="stat-number" id="qrOrders">8</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Order Action Buttons -->
+            <div class="order-actions">
+                <button class="modern-btn" id="placeOrderBtn">
+                    <span class="btn-text">
+                        <span style="--i:0">P</span><span style="--i:1">l</span>
+                        <span style="--i:2">a</span><span style="--i:3">c</span>
+                        <span style="--i:4">e</span><span style="--i:5">&nbsp;</span>
+                        <span style="--i:6">O</span><span style="--i:7">r</span>
+                        <span style="--i:8">d</span><span style="--i:9">e</span>
+                        <span style="--i:10">r</span>
+                    </span>
+                </button>
+
+                <button class="light-btn" id="placeQROrderBtn">
+                    <i class="fas fa-qrcode"></i>
+                    Place Order by QR
+                </button>
+            </div>
+
+            <!-- Orders List -->
+            <div class="orders-section">
+                <div class="section-header">
+                    <h3>Recent Orders</h3>
+                    <i class="fas fa-bolt"></i>
+                </div>
+
+                <div class="orders-list" id="ordersList"></div>
+            </div>
+        </div>
+
+        <!-- Bottom Navigation Bar - Light -->
+        <div class="bottom-nav">
+            <div class="nav-item active" data-nav="home">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </div>
+            <div class="nav-item" data-nav="search">
+                <i class="fas fa-search"></i>
+                <span>Search</span>
+            </div>
+            <div class="nav-item" data-nav="history">
+                <i class="fas fa-history"></i>
+                <span>History</span>
+            </div>
+            <div class="nav-item" data-nav="profile">
+                <i class="fas fa-user"></i>
+                <span>Profile</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- QR Modal -->
+    <div class="modal" id="qrModal">
+        <div class="modal-content">
+            <i class="fas fa-qrcode"></i>
+            <h2>Scan QR Code</h2>
+            <p>Position the QR code within the frame</p>
+            <div class="qr-placeholder">
+                <i class="fas fa-camera"></i>
+            </div>
+            <button class="modal-close" id="closeModalBtn">Cancel</button>
+        </div>
+    </div>
+
+    <script>
+        // Sample orders data
+        let orders = [
+            {
+                id: '#ORD-001',
+                type: 'regular',
+                items: '3 items • Pizza, Pasta, Drink',
+                time: '10 min ago',
+                amount: '45.99'
+            },
+            {
+                id: '#ORD-002',
+                type: 'regular',
+                items: '2 items • Burger, Fries',
+                time: '25 min ago',
+                amount: '24.99'
+            },
+            {
+                id: '#QR-001',
+                type: 'qr',
+                items: '1 item • Special Combo',
+                time: '1 hour ago',
+                amount: '32.99'
+            },
+            {
+                id: '#QR-002',
+                type: 'qr',
+                items: '4 items • Family Meal Deal',
+                time: '2 hours ago',
+                amount: '89.99'
+            }
+        ];
+
+        // DOM Elements
+        const placeOrderBtn = document.getElementById('placeOrderBtn');
+        const placeQROrderBtn = document.getElementById('placeQROrderBtn');
+        const qrModal = document.getElementById('qrModal');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const ordersList = document.getElementById('ordersList');
+        const totalOrdersEl = document.getElementById('totalOrders');
+        const qrOrdersEl = document.getElementById('qrOrders');
+        const navItems = document.querySelectorAll('.nav-item');
+        
+        // Timer elements
+        const hoursEl = document.getElementById('hours');
+        const minutesEl = document.getElementById('minutes');
+        const secondsEl = document.getElementById('seconds');
+
+        // Timer functionality
+        let timeLeft = 36 * 60 + 58; // 36 minutes and 58 seconds
+
+        function updateTimer() {
+            const hours = Math.floor(timeLeft / 3600);
+            const minutes = Math.floor((timeLeft % 3600) / 60);
+            const seconds = timeLeft % 60;
+
+            hoursEl.textContent = hours.toString().padStart(2, '0');
+            minutesEl.textContent = minutes.toString().padStart(2, '0');
+            secondsEl.textContent = seconds.toString().padStart(2, '0');
+
+            if (timeLeft > 0) {
+                timeLeft--;
+            }
+        }
+
+        // Update timer every second
+        updateTimer();
+        setInterval(updateTimer, 1000);
+
+        // Function to render orders
+        function renderOrders() {
+            ordersList.innerHTML = orders.map(order => `
+                <div class="order-item">
+                    <div class="order-icon">
+                        <i class="fas ${order.type === 'regular' ? 'fa-shopping-bag' : 'fa-qrcode'}"></i>
+                    </div>
+                    <div class="order-info">
+                        <div class="order-header">
+                            <span class="order-id">${order.id}</span>
+                            <span class="order-type">${order.type === 'regular' ? 'Regular' : 'QR'}</span>
+                        </div>
+                        <div class="order-items">${order.items}</div>
+                        <div class="order-time">
+                            <i class="far fa-clock"></i>
+                            ${order.time}
+                        </div>
+                    </div>
+                    <div class="order-amount">$${order.amount}</div>
+                </div>
+            `).join('');
+        }
+
+        // Function to update stats
+        function updateStats() {
+            totalOrdersEl.textContent = orders.length;
+            qrOrdersEl.textContent = orders.filter(o => o.type === 'qr').length;
+        }
+
+        // Place Order Button
+        placeOrderBtn.addEventListener('click', () => {
+            const btnText = placeOrderBtn.querySelector('.btn-text');
+            const originalHTML = btnText.innerHTML;
+            
+            btnText.innerHTML = '<span style="--i:0">P</span><span style="--i:1">l</span><span style="--i:2">a</span><span style="--i:3">c</span><span style="--i:4">i</span><span style="--i:5">n</span><span style="--i:6">g</span><span style="--i:7">.</span><span style="--i:8">.</span><span style="--i:9">.</span>';
+            
+            setTimeout(() => {
+                const newOrder = {
+                    id: `#ORD-${String(orders.length + 1).padStart(3, '0')}`,
+                    type: 'regular',
+                    items: '2 items • Flash Sale Item',
+                    time: 'Just now',
+                    amount: '19.99'
+                };
+                
+                orders.unshift(newOrder);
+                renderOrders();
+                updateStats();
+                btnText.innerHTML = originalHTML;
+            }, 1500);
+        });
+
+        // Place QR Order Button
+        placeQROrderBtn.addEventListener('click', () => {
+            qrModal.classList.add('active');
+            
+            setTimeout(() => {
+                const newOrder = {
+                    id: `#QR-${String(orders.filter(o => o.type === 'qr').length + 1).padStart(3, '0')}`,
+                    type: 'qr',
+                    items: 'QR Order • Flash Deal',
+                    time: 'Just now',
+                    amount: '29.99'
+                };
+                
+                orders.unshift(newOrder);
+                renderOrders();
+                updateStats();
+                qrModal.classList.remove('active');
+            }, 2000);
+        });
+
+        // Close modal
+        closeModalBtn.addEventListener('click', () => {
+            qrModal.classList.remove('active');
+        });
+
+        qrModal.addEventListener('click', (e) => {
+            if (e.target === qrModal) {
+                qrModal.classList.remove('active');
+            }
+        });
+
+        // Bottom navigation click effect
+        navItems.forEach(item => {
+            item.addEventListener('click', function() {
+                navItems.forEach(nav => nav.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Here you can add different content for each tab
+                const navType = this.dataset.nav;
+                console.log(`Navigating to ${navType}`);
+            });
+        });
+
+        // Initial render
+        renderOrders();
+        updateStats();
+    </script>
+</body>
+</html>
